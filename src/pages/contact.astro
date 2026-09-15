@@ -91,22 +91,27 @@ const description = 'Tell me about your project or business problem. Receive a t
 
           <!-- Direct Channels (Rendered ONLY if real values are set) -->
           {(hasEmail || hasPhone) && (
-            <div class="sidebar-card card">
+            <div class="sidebar-card card direct-contact-card">
               <h3>Direct Contact</h3>
+              <div class="owner-contact-intro">
+                <strong class="owner-name">{siteConfig.ownerName}</strong>
+                <span class="owner-title">{siteConfig.ownerTitle}</span>
+              </div>
               <ul class="direct-list">
-                {hasEmail && (
-                  <li>
-                    <span>Email:</span>
-                    <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
-                  </li>
-                )}
                 {hasPhone && (
                   <li>
-                    <span>Phone:</span>
-                    <a href={`tel:${siteConfig.phone}`}>{siteConfig.phone}</a>
+                    <span class="contact-label">Phone:</span>
+                    <a href={`tel:${siteConfig.phoneRaw}`} class="contact-link">{siteConfig.phone}</a>
+                  </li>
+                )}
+                {hasEmail && (
+                  <li>
+                    <span class="contact-label">Email:</span>
+                    <a href={`mailto:${siteConfig.contactEmail}`} class="contact-link">{siteConfig.contactEmail}</a>
                   </li>
                 )}
               </ul>
+              <p class="service-area-note">{siteConfig.serviceArea}</p>
             </div>
           )}
         </div>
@@ -231,21 +236,64 @@ const description = 'Tell me about your project or business problem. Receive a t
     margin-bottom: 1.25rem;
   }
 
+  .owner-contact-intro {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .owner-name {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+  }
+
+  .owner-title {
+    font-size: 0.85rem;
+    color: var(--accent-glow);
+    font-family: var(--font-mono);
+  }
+
   .direct-list {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    gap: 0.65rem;
+    font-size: 0.925rem;
+    margin-bottom: 1rem;
   }
 
   .direct-list li {
     display: flex;
     gap: 0.5rem;
+    align-items: baseline;
   }
 
-  .direct-list span {
+  .contact-label {
     color: var(--text-muted);
+    font-size: 0.85rem;
+    min-width: 48px;
+  }
+
+  .contact-link {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast);
+  }
+
+  .contact-link:hover {
+    color: var(--accent-glow);
+  }
+
+  .service-area-note {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+    margin: 0;
   }
 
   @media (max-width: 950px) {

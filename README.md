@@ -144,7 +144,7 @@ The contact form on `/contact` is wired directly to **Netlify Forms**:
 2. Click **Add notification > Email notification**.
 3. Event: Select **New form submission**.
 4. Form: Select `project-inquiry`.
-5. Enter your destination email address (e.g., `jeremi.jenkins@gmail.com`).
+5. Enter your destination email address: `Jeremi.Jenkins@gmail.com`.
 6. Save. Every new lead will instantly be emailed to you with the submitter's email pre-configured in `Reply-To`.
 
 ---
@@ -155,6 +155,7 @@ The site is configured for zero-configuration Git-based deployment:
 - **Build command:** `npm run build`
 - **Publish directory:** `dist`
 - **Config file:** `netlify.toml`
+- **Live Netlify URL:** `https://statenislandsaas.netlify.app`
 
 ### Linking to Netlify
 1. Log into Netlify at [app.netlify.com](https://app.netlify.com).
@@ -165,26 +166,28 @@ The site is configured for zero-configuration Git-based deployment:
    - Publish directory: `dist`
 5. Click **Deploy site**. Future pushes to `main` will automatically build and deploy.
 
-### Custom Domain Setup
-When ready to connect a custom domain (e.g. `statenislandsoftware.com`):
-1. In Netlify, go to **Domain management > Add custom domain**.
-2. Enter your domain name.
-3. Configure DNS records at your domain registrar:
-   - Apex domain (`statenislandsoftware.com`): Set `A` record pointing to Netlify's load balancer `75.2.60.5` (or Netlify DNS nameservers).
-   - Subdomain (`www.statenislandsoftware.com`): Set `CNAME` pointing to your site's Netlify subdomain (`[your-site-name].netlify.app`).
-4. Netlify will automatically provision a free Let's Encrypt SSL/TLS certificate with automatic HTTPS redirection.
-5. In `src/config/site.ts`, update `canonicalUrl` to your new domain.
+### Changing to a Custom Domain Later
+
+The site architecture is designed so that the production canonical URL is controlled from **one central place** (`src/config/site.ts`). When you purchase a custom domain later, follow these steps:
+
+1. **Add the domain in Netlify:** Go to **Domain management > Add custom domain** and enter your purchased domain.
+2. **Configure DNS records:** Add the DNS records provided by Netlify at your domain registrar (such as Netlify nameservers or standard A / CNAME records).
+3. **Enable HTTPS:** Netlify will automatically verify DNS and issue a free Let's Encrypt SSL/TLS certificate with automatic HTTPS redirection.
+4. **Change the central canonicalUrl:** In `src/config/site.ts`, update `canonicalUrl: 'https://statenislandsaas.netlify.app'` to your new domain (e.g. `'https://yournewdomain.com'`). Because `astro.config.mjs`, `Layout.astro`, `JsonLd.astro`, and OpenGraph metadata import directly from `siteConfig`, this single change updates the entire project.
+5. **Rebuild/deploy:** Commit the change and push to `main` (`git commit -am "Update canonical URL to custom domain" && git push origin main`). Netlify will automatically rebuild and publish the static bundle.
+6. **Verify:** Check that canonical tags, sitemap (`/sitemap-index.xml`), `robots.txt`, and redirects resolve cleanly to the new domain.
+7. **Set primary domain:** In Netlify Domain settings, set your custom domain as the primary domain so any default `.netlify.app` visits redirect to your custom domain.
 
 ---
 
 ## SEO & Google Search Console Setup
 
 1. **Sitemap:** The site automatically generates a sitemap at:
-   `https://statenislandsoftware.com/sitemap-index.xml`
+   `https://statenislandsaas.netlify.app/sitemap-index.xml`
 2. **Robots.txt:** Pre-configured in `public/robots.txt` pointing to the sitemap index.
 3. **Google Search Console Verification:**
    - Add your verification token to `PUBLIC_GOOGLE_SITE_VERIFICATION` in your Netlify site environment variables (or directly into `siteConfig.googleSearchConsoleVerification` in `src/config/site.ts`).
-   - In Google Search Console, submit the sitemap URL: `https://statenislandsoftware.com/sitemap-index.xml`.
+   - In Google Search Console, submit the sitemap URL: `https://statenislandsaas.netlify.app/sitemap-index.xml`.
 
 ---
 

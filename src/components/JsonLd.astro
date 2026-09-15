@@ -27,6 +27,11 @@ const organizationSchema: Record<string, any> = {
   url: siteConfig.canonicalUrl,
   logo: `${siteConfig.canonicalUrl}/favicon.svg`,
   description: siteConfig.tagline,
+  founder: {
+    '@type': 'Person',
+    name: siteConfig.ownerName,
+    jobTitle: siteConfig.ownerTitle
+  },
   areaServed: [
     {
       '@type': 'AdministrativeArea',

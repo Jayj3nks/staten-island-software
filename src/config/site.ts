@@ -15,8 +15,10 @@ export interface SiteConfig {
   serviceArea: string;
   canonicalUrl: string;
   ownerName: string;
+  ownerTitle: string;
   contactEmail: string;
   phone: string;
+  phoneRaw: string;
   githubUrl: string;
   fiverrUrl: string;
   linkedInUrl: string;
@@ -34,11 +36,12 @@ export const siteConfig: SiteConfig = {
   heroSubhead:
     'Staten Island Software builds websites, custom software, automations, integrations, internal tools, and AI-assisted solutions for local and remote clients.',
   serviceArea: 'Serving Staten Island, NYC, and remote clients.',
-  canonicalUrl: 'https://statenislandsoftware.com',
-  ownerName: 'Jeremi Jenkins',
-  // Set these when ready. If empty, the site automatically hides them and routes users to the contact form.
-  contactEmail: '',
-  phone: '',
+  canonicalUrl: 'https://statenislandsaas.netlify.app',
+  ownerName: 'Jeremi M. Jenkins',
+  ownerTitle: 'Software Engineer',
+  contactEmail: 'Jeremi.Jenkins@gmail.com',
+  phone: '347-558-7702',
+  phoneRaw: '3475587702',
   githubUrl: 'https://github.com/Jayj3nks',
   fiverrUrl: '',
   linkedInUrl: '',

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://statenislandsoftware.com/sitemap-index.xml
+Sitemap: https://statenislandsaas.netlify.app/sitemap-index.xml
