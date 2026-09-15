@@ -1,0 +1,308 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PricingCard from '../../components/PricingCard.astro';
+import { services } from '../../data/services';
+import { websiteTiers } from '../../data/pricing';
+import { siteConfig } from '../../config/site';
+
+const service = services.find((s) => s.slug === 'web-development')!;
+const pageTitle = `Website Development Staten Island & NYC | ${siteConfig.businessName}`;
+const pageDesc = 'High-performance business websites, responsive redesigns, and lead-generation pages engineered for local discovery and zero maintenance overhead.';
+
+const serviceSchema = {
+  name: 'Website Development',
+  description: service.summary,
+  category: 'SoftwareEngineering'
+};
+---
+
+<Layout title={pageTitle} description={pageDesc} serviceData={serviceSchema}>
+  <!-- Hero Section -->
+  <section class="section service-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/services">Services</a>
+        <span class="sep">/</span>
+        <span>Website Development</span>
+      </div>
+
+      <div class="service-hero-grid">
+        <div class="hero-left">
+          <span class="section-tag">Web Engineering</span>
+          <h1>{service.headline}</h1>
+          <p class="lead-text">{service.summary}</p>
+          <div class="hero-cta-group">
+            <a href="#packages" class="btn btn-primary btn-lg">
+              View Website Packages
+            </a>
+            <a href="/contact?service=Website%20Development" class="btn btn-secondary btn-lg">
+              Request a Custom Quote
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="tech-spec-box card">
+            <h3>Engineering Priorities</h3>
+            <ul class="spec-list">
+              <li>
+                <strong>Fast Mobile Load Times:</strong> Sub-second First Contentful Paint without heavy builder code.
+              </li>
+              <li>
+                <strong>Reliable Lead Capture:</strong> Integrated spam-protected contact forms connected straight to your email.
+              </li>
+              <li>
+                <strong>Local SEO Foundations:</strong> Schema.org markup, semantic headings, sitemaps, and clean architecture.
+              </li>
+              <li>
+                <strong>Zero Hosting Headaches:</strong> Modern static site generation with secure, zero-maintenance hosting.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offerings Breakdown -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">What I Build</span>
+        <h2>Website Offerings & Capabilities</h2>
+        <p>Whether you need your first online presence or a complete rebuild of a slow, outdated site.</p>
+      </div>
+
+      <div class="grid-2">
+        {service.offerings.map((offering) => (
+          <div class="offering-card card">
+            <div class="offering-icon">✓</div>
+            <div class="offering-text">
+              <span class="offering-title">{offering}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Practical Scenarios -->
+  <section class="section practical-section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Real-World Applications</span>
+        <h2>Practical Business Use Cases</h2>
+      </div>
+
+      <div class="grid-3">
+        {service.practicalUseCases.map((useCase) => (
+          <div class="usecase-card card">
+            <h3>{useCase.title}</h3>
+            <p>{useCase.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Website Packages -->
+  <section class="section packages-section" id="packages">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Transparent Launch Pricing</span>
+        <h2>Website Packages</h2>
+        <p>
+          Straightforward pricing with no hidden developer fees. Every project includes responsive mobile layout, contact form, basic SEO, and 2 revision rounds.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        {websiteTiers.map((tier) => (
+          <PricingCard tier={tier} />
+        ))}
+      </div>
+
+      <div class="scope-note card">
+        <h4>Scope & Transparency Guarantee</h4>
+        <p>
+          Website packages are designed for standard marketing, lead generation, and business informational websites. Ecommerce stores, customer portals, or complex custom database applications are scoped separately as custom software projects.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What You Can Expect -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Deliverables</span>
+        <h2>What You Receive at Handoff</h2>
+      </div>
+
+      <div class="grid-2">
+        {service.whatToExpect.map((item) => (
+          <div class="handoff-card card">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="check-icon"><polyline points="20 6 9 17 4 12"/></svg>
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .service-hero {
+    padding-top: 3.5rem;
+    padding-bottom: 4rem;
+    background: radial-gradient(ellipse 60% 40% at 30% 0%, rgba(37, 99, 235, 0.12), transparent 70%);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: var(--accent-glow);
+  }
+
+  .service-hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .lead-text {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 1.25rem 0 2rem 0;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .tech-spec-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    padding: 2.25rem;
+  }
+
+  .tech-spec-box h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1.25rem;
+    color: var(--text-primary);
+  }
+
+  .spec-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .spec-list li {
+    font-size: 0.925rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .spec-list strong {
+    color: var(--text-primary);
+  }
+
+  .offering-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-surface);
+  }
+
+  .offering-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-surface);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .offering-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .practical-section {
+    background: var(--bg-surface);
+  }
+
+  .usecase-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .usecase-card p {
+    font-size: 0.925rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .packages-section {
+    background: var(--bg-primary);
+  }
+
+  .scope-note {
+    margin-top: 2.5rem;
+    padding: 1.75rem 2rem;
+    background: var(--bg-surface);
+  }
+
+  .scope-note h4 {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .scope-note p {
+    font-size: 0.925rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  .handoff-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-surface);
+  }
+
+  .check-icon {
+    color: var(--success);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  @media (max-width: 900px) {
+    .service-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

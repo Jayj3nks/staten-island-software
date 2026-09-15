@@ -1,0 +1,140 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+
+const title = `Terms of Use & Pricing Disclaimers | ${siteConfig.businessName}`;
+const description = 'Website terms of use and transparent pricing disclaimers for Staten Island Software.';
+---
+
+<Layout title={title} description={description}>
+  <section class="section legal-page-section">
+    <div class="container legal-container">
+      <div class="legal-header">
+        <span class="section-tag">Terms & Conditions</span>
+        <h1>Terms of Use</h1>
+        <p class="last-updated">Last Updated: September 2026</p>
+      </div>
+
+      <div class="legal-content card">
+        <h2>1. Website Informational Purpose</h2>
+        <p>
+          This website is published by Staten Island Software to describe independent software engineering, web development, and automation services. Access to and use of this website is governed by these Terms of Use.
+        </p>
+
+        <h2>2. Pricing & Non-Binding Estimates</h2>
+        <p>
+          All pricing listed on this website (including website packages starting at $349, automation starting at $149, custom software starting at $699, and hourly rates) is <strong>introductory and representative starting pricing</strong>.
+        </p>
+        <p>
+          Pricing presented on this website does <strong>not</strong> constitute a binding contract or firm offer to complete unspecified work. Every formal client engagement requires a mutually agreed, written scope of work specifying:
+        </p>
+        <ul>
+          <li>Explicit deliverable items and architecture requirements.</li>
+          <li>Estimated timeline and project milestone schedules.</li>
+          <li>Total fixed project price or agreed hourly rate.</li>
+          <li>Specific technical exclusions or third-party license costs.</li>
+        </ul>
+
+        <h2>3. Independent Contractual Engagement</h2>
+        <p>
+          Submitting a project inquiry or contacting Staten Island Software does not establish an attorney-client, agency, partnership, or binding development relationship. Development work begins only after both parties agree to project specifications and the initial deposit or milestone payment is confirmed.
+        </p>
+
+        <h2>4. Code Ownership & Intellectual Property</h2>
+        <p>
+          Website visitors may not scrape, replicate, or misappropriate the brand assets, trademarked identifiers, or visual assets of Staten Island Software without authorization.
+        </p>
+        <p>
+          For client engagements, intellectual property ownership of custom source code is granted upon receipt of final payment as detailed in each individual project agreement. Pre-existing software libraries, frameworks, and open-source packages remain subject to their respective licenses.
+        </p>
+
+        <h2>5. No Guarantees of Specific Search Engine Rankings</h2>
+        <p>
+          While Staten Island Software adheres to modern technical SEO best practices, semantic markup, and Core Web Vitals optimization, I do not guarantee specific numerical search rankings (e.g. "#1 on Google") on any search engine, as search algorithms and regional competitor dynamics are controlled solely by third-party search providers.
+        </p>
+
+        <h2>6. Third-Party Services & Dependencies</h2>
+        <p>
+          Certain web tools and automations may interface with third-party software, APIs, payment processors, or cloud hosting providers (e.g., Netlify, Stripe, Google Cloud). Staten Island Software is not responsible for outages, rate limit modifications, or API deprecations imposed by external platform vendors outside my control.
+        </p>
+
+        <h2>7. Questions</h2>
+        <p>
+          If you have questions regarding these terms, please submit an inquiry via the <a href="/contact">contact page</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal-page-section {
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .legal-container {
+    max-width: 860px;
+  }
+
+  .legal-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .legal-header h1 {
+    font-size: clamp(2.2rem, 3.5vw, 3rem);
+    margin: 0.5rem 0;
+  }
+
+  .last-updated {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .legal-content {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: 3rem;
+  }
+
+  .legal-content h2 {
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-content h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .legal-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .legal-content li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-content strong {
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .legal-content {
+      padding: 1.75rem;
+    }
+  }
+</style>

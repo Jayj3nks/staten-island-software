@@ -1,0 +1,292 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { services } from '../../data/services';
+import { siteConfig } from '../../config/site';
+
+const service = services.find((s) => s.slug === 'integrations')!;
+const pageTitle = `API & System Integration Services | ${siteConfig.businessName}`;
+const pageDesc = 'Connect disparate business platforms, synchronize databases, and configure reliable webhooks and REST API pipelines.';
+
+const serviceSchema = {
+  name: 'API & System Integration',
+  description: service.summary,
+  category: 'SoftwareEngineering'
+};
+---
+
+<Layout title={pageTitle} description={pageDesc} serviceData={serviceSchema}>
+  <section class="section service-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/services">Services</a>
+        <span class="sep">/</span>
+        <span>API & Integrations</span>
+      </div>
+
+      <div class="service-hero-grid">
+        <div class="hero-left">
+          <span class="section-tag">Systems & APIs</span>
+          <h1>{service.headline}</h1>
+          <p class="lead-text">
+            Have two systems that don't talk to each other? An API integration may remove hours of manual entry by synchronizing your records in real time.
+          </p>
+          <div class="hero-cta-group">
+            <a href="/contact?service=API%20/%20Integration" class="btn btn-primary btn-lg">
+              Connect Your Systems
+            </a>
+            <a href="/pricing#software" class="btn btn-secondary btn-lg">
+              View Integration Pricing
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="rate-callout-card card">
+            <span class="badge badge-blue">Starting Scope</span>
+            <h3>Integration Pricing</h3>
+            <div class="rate-item">
+              <span class="rate-name">API / Software Integration</span>
+              <span class="rate-price">Starting at $249</span>
+            </div>
+            <div class="rate-item">
+              <span class="rate-name">Two-Way Multi-Platform Sync</span>
+              <span class="rate-price">Starting at $349</span>
+            </div>
+            <div class="rate-item">
+              <span class="rate-name">Custom Webhook Listener</span>
+              <span class="rate-price">Starting at $199</span>
+            </div>
+            <p class="rate-note">
+              Secure credential handling, idempotent executions, and retry routines included.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offerings -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Integration Capabilities</span>
+        <h2>What I Connect & Synchronize</h2>
+      </div>
+
+      <div class="grid-2">
+        {service.offerings.map((offering) => (
+          <div class="offering-card card">
+            <div class="offering-icon">⚡</div>
+            <span class="offering-title">{offering}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Practical Use Cases -->
+  <section class="section practical-section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Practical Architecture</span>
+        <h2>Common Business Integrations</h2>
+      </div>
+
+      <div class="grid-3">
+        {service.practicalUseCases.map((useCase) => (
+          <div class="usecase-card card">
+            <h3>{useCase.title}</h3>
+            <p>{useCase.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Security & Deliverables -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Security & Best Practices</span>
+        <h2>How I Protect Your Data During Integration</h2>
+      </div>
+
+      <div class="grid-2">
+        {service.whatToExpect.map((item) => (
+          <div class="handoff-card card">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="check-icon"><polyline points="20 6 9 17 4 12"/></svg>
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="bottom-cta-box card">
+        <h3>Need two platforms connected?</h3>
+        <p>Tell me which tools you are using and what data needs to transfer. I will provide an integration scope.</p>
+        <a href="/contact?service=API%20/%20Integration" class="btn btn-primary btn-lg">
+          Request an Integration Scope
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .service-hero {
+    padding-top: 3.5rem;
+    padding-bottom: 4rem;
+    background: radial-gradient(ellipse 60% 40% at 30% 0%, rgba(37, 99, 235, 0.12), transparent 70%);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: var(--accent-glow);
+  }
+
+  .service-hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .lead-text {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 1.25rem 0 2rem 0;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .rate-callout-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    padding: 2.25rem;
+  }
+
+  .rate-callout-card h3 {
+    font-size: 1.25rem;
+    margin: 0.75rem 0 1.25rem 0;
+  }
+
+  .rate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.925rem;
+  }
+
+  .rate-name {
+    color: var(--text-secondary);
+  }
+
+  .rate-price {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--accent-glow);
+  }
+
+  .rate-note {
+    font-size: 0.825rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+  }
+
+  .offering-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-surface);
+  }
+
+  .offering-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--accent-surface);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .offering-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .practical-section {
+    background: var(--bg-surface);
+  }
+
+  .usecase-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .usecase-card p {
+    font-size: 0.925rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .handoff-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-surface);
+  }
+
+  .check-icon {
+    color: var(--success);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .bottom-cta-box {
+    margin-top: 3.5rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-border);
+  }
+
+  .bottom-cta-box h3 {
+    font-size: 1.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .bottom-cta-box p {
+    font-size: 1.05rem;
+    max-width: 550px;
+    margin: 0 auto 1.75rem auto;
+  }
+
+  @media (max-width: 900px) {
+    .service-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

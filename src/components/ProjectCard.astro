@@ -1,0 +1,249 @@
+---
+import type { ProjectItem } from '../data/projects';
+
+interface Props {
+  project: ProjectItem;
+}
+
+const { project } = Astro.props;
+const isDemo = project.badge === 'Demo Project';
+---
+
+<article class="project-card card">
+  <div class="project-top">
+    <div class="badge-group">
+      <span class={`badge ${isDemo ? 'badge-demo' : 'badge-concept'}`}>
+        {project.badge}
+      </span>
+      <span class="project-category">{project.category}</span>
+    </div>
+    <h3 class="project-title">{project.title}</h3>
+    <p class="project-summary">{project.summary}</p>
+  </div>
+
+  <div class="project-body">
+    <!-- Problem & Solution -->
+    <div class="challenge-solution-grid">
+      <div class="cs-box problem-box">
+        <h4 class="cs-label">
+          <span class="cs-dot dot-red" aria-hidden="true"></span>
+          Problem Solved
+        </h4>
+        <p>{project.problem}</p>
+      </div>
+      <div class="cs-box solution-box">
+        <h4 class="cs-label">
+          <span class="cs-dot dot-green" aria-hidden="true"></span>
+          Engineering Solution
+        </h4>
+        <p>{project.solution}</p>
+      </div>
+    </div>
+
+    <!-- Technical Highlights -->
+    <div class="highlights-box">
+      <h4 class="highlights-title">Technical Highlights:</h4>
+      <ul class="highlights-list">
+        {project.technicalHighlights.map((highlight) => (
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+            <span>{highlight}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Outcome / Metric -->
+    <div class="metric-banner">
+      <span class="metric-icon" aria-hidden="true">⚡</span>
+      <span class="metric-text">{project.metricsOrOutcome}</span>
+    </div>
+  </div>
+
+  <div class="project-footer">
+    <div class="tech-stack-wrap" aria-label="Technologies used">
+      {project.stack.map((tech) => (
+        <span class="tech-tag">{tech}</span>
+      ))}
+    </div>
+    <a href={`/contact?service=${encodeURIComponent(project.category)}`} class="btn btn-outline btn-sm">
+      Discuss Similar Project
+    </a>
+  </div>
+</article>
+
+<style>
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem;
+    position: relative;
+  }
+
+  .badge-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-category {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .project-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-summary {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 1.75rem;
+  }
+
+  .challenge-solution-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .challenge-solution-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .cs-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 1.2rem;
+  }
+
+  .cs-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+  }
+
+  .cs-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dot-red {
+    background: var(--error);
+  }
+
+  .dot-green {
+    background: var(--success);
+  }
+
+  .cs-box p {
+    font-size: 0.885rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .highlights-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .highlights-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .highlights-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .highlights-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+
+  .highlights-list svg {
+    flex-shrink: 0;
+    color: var(--accent-glow);
+    margin-top: 2px;
+  }
+
+  .metric-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--accent-surface);
+    border: 1px solid var(--accent-border);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .metric-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #e0f2fe;
+  }
+
+  .project-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    margin-top: auto;
+  }
+
+  .tech-stack-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-glow);
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+  }
+</style>

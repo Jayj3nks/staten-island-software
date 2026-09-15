@@ -1,0 +1,136 @@
+---
+// HowIWork.astro - 4-step transparent development process
+const steps = [
+  {
+    step: '01',
+    title: 'Understand',
+    summary: 'We discuss the problem, desired outcome, requirements, and technical constraints.',
+    details: 'Before writing a line of code, I take the time to understand how your business operates and what measurable result you need.'
+  },
+  {
+    step: '02',
+    title: 'Scope',
+    summary: 'I define deliverables, pricing, timeline, and what is not included.',
+    details: 'You receive a clear, transparent scope of work with upfront pricing. No vague estimates or surprise scope additions.'
+  },
+  {
+    step: '03',
+    title: 'Build',
+    summary: 'I develop the solution and provide useful progress updates.',
+    details: 'I build your website, tool, or automation cleanly, adhering to web standards and keeping you updated as milestones are reached.'
+  },
+  {
+    step: '04',
+    title: 'Launch & Support',
+    summary: 'The finished work is tested, deployed, handed off, and support options are available afterward.',
+    details: 'After thorough testing and client approval, the project is deployed to production with full code access and optional maintenance.'
+  }
+];
+---
+
+<section class="section how-i-work-section" id="how-i-work">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Direct Process</span>
+      <h2>How I Work With Clients</h2>
+      <p>
+        Straightforward, predictable engineering without agency layers, account managers, or unexpected surprises.
+      </p>
+    </div>
+
+    <div class="steps-grid">
+      {steps.map((item) => (
+        <div class="step-card card">
+          <div class="step-num-wrap">
+            <span class="step-num">{item.step}</span>
+            <div class="step-line" aria-hidden="true"></div>
+          </div>
+          <h3 class="step-title">{item.title}</h3>
+          <p class="step-summary">{item.summary}</p>
+          <p class="step-details">{item.details}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .how-i-work-section {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 992px) {
+    .steps-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .step-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .step-num-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--accent-glow);
+    background: var(--accent-surface);
+    border: 1px solid var(--accent-border);
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .step-line {
+    flex-grow: 1;
+    height: 1px;
+    background: var(--border-subtle);
+  }
+
+  .step-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.65rem;
+  }
+
+  .step-summary {
+    font-size: 0.925rem;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin-bottom: 0.75rem;
+  }
+
+  .step-details {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+</style>

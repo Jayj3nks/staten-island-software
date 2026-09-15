@@ -1,0 +1,180 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import HowIWork from '../../components/HowIWork.astro';
+import { services } from '../../data/services';
+import { siteConfig } from '../../config/site';
+
+const title = `Software Engineering Services | ${siteConfig.businessName}`;
+const description = 'Explore practical software services: high-speed website development, custom internal software, workflow automation, API integrations, and AI tooling.';
+---
+
+<Layout title={title} description={description}>
+  <section class="section page-header-section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Capabilities & Specializations</span>
+        <h1>Software Engineering Services</h1>
+        <p>
+          I provide independent software engineering for businesses, entrepreneurs, and organizations. Every service focuses on practical outcomes: eliminating manual effort, ensuring reliability, and building things that actually work.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid-3">
+        {services.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Maintenance & Support Callout -->
+  <section class="section support-highlight-section">
+    <div class="container">
+      <div class="support-card card">
+        <div class="support-content">
+          <span class="badge badge-blue">Ongoing Reliability</span>
+          <h2>Maintenance & Technical Support</h2>
+          <p>
+            Have an existing website or internal tool that needs bug fixes, performance tuning, or regular software updates? I offer dependable on-demand troubleshooting starting at <strong>$75</strong> and monthly maintenance plans starting at <strong>$79/month</strong>.
+          </p>
+          <ul class="support-bullet-list">
+            <li>Software dependency updates and security patches</li>
+            <li>Form monitoring, uptime verification, and bug fixes</li>
+            <li>Fast turnaround on content updates and small enhancements</li>
+            <li>Direct engineer support with zero ticketing runarounds</li>
+          </ul>
+        </div>
+        <div class="support-action">
+          <a href="/pricing#support" class="btn btn-primary btn-lg">
+            View Support Plans
+          </a>
+          <a href="/contact?service=Maintenance" class="btn btn-secondary btn-lg">
+            Request Support
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <HowIWork />
+
+  <!-- Bottom CTA -->
+  <section class="section">
+    <div class="container text-center">
+      <div class="quote-prompt-box card">
+        <h2>Have a Custom Project in Mind?</h2>
+        <p>
+          If you need a tool, script, or system that is not specifically categorized above, tell me about your workflow and what you want to accomplish.
+        </p>
+        <div class="cta-actions">
+          <a href="/contact" class="btn btn-primary btn-lg">
+            Request a Free Project Quote
+          </a>
+          <a href="/pricing" class="btn btn-outline btn-lg">
+            View Transparent Pricing
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header-section {
+    padding-top: 4.5rem;
+  }
+
+  .support-highlight-section {
+    padding-top: 0;
+  }
+
+  .support-card {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    padding: 3rem;
+    border-radius: var(--radius-xl);
+  }
+
+  .support-content h2 {
+    font-size: 1.85rem;
+    margin: 0.75rem 0 1rem 0;
+  }
+
+  .support-content p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .support-bullet-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .support-bullet-list li {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .support-bullet-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent-glow);
+    font-weight: bold;
+  }
+
+  .support-action {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .quote-prompt-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+    text-align: center;
+  }
+
+  .quote-prompt-box h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .quote-prompt-box p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .support-card {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .support-bullet-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

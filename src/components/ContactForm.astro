@@ -1,0 +1,517 @@
+---
+// ContactForm.astro - Production Netlify-compatible form with interactive validation
+---
+
+<div class="form-wrapper">
+  <!-- Form Notification Banner (Success & Error States) -->
+  <div id="form-success-banner" class="form-alert form-alert-success" hidden role="status">
+    <div class="alert-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+    </div>
+    <div class="alert-content">
+      <h3 class="alert-title">Inquiry Received</h3>
+      <p class="alert-text">
+        Thank you for reaching out. I have received your project details and will review your requirements and follow up with you promptly.
+      </p>
+    </div>
+  </div>
+
+  <div id="form-error-banner" class="form-alert form-alert-error" hidden role="alert">
+    <div class="alert-icon" aria-hidden="true">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    </div>
+    <div class="alert-content">
+      <h3 class="alert-title">Submission Issue</h3>
+      <p class="alert-text" id="form-error-text">
+        There was an issue submitting your inquiry. Please check the required fields or email directly.
+      </p>
+    </div>
+  </div>
+
+  <!-- Main Netlify Form -->
+  <form 
+    id="project-inquiry-form"
+    name="project-inquiry" 
+    method="POST" 
+    data-netlify="true" 
+    data-netlify-honeypot="bot-field"
+    action="/contact?success=true"
+    class="inquiry-form"
+    novalidate
+  >
+    <!-- Hidden fields for Netlify Forms & email subject -->
+    <input type="hidden" name="form-name" value="project-inquiry" />
+    <input type="hidden" name="subject" value="New Staten Island Software project inquiry" />
+
+    <!-- Spam Protection Honeypot -->
+    <p class="hidden-field" style="display:none;" aria-hidden="true">
+      <label>Do not fill this out if you are human: <input name="bot-field" tabindex="-1" /></label>
+    </p>
+
+    <div class="form-grid">
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="contact-name" class="form-label">
+          Your Name <span class="required" aria-hidden="true">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="contact-name" 
+          name="name" 
+          class="form-input" 
+          placeholder="e.g. Alex Rivera" 
+          required 
+          autocomplete="name"
+          aria-required="true"
+        />
+        <span class="field-error" id="name-error" role="alert" hidden>Please enter your name.</span>
+      </div>
+
+      <!-- Email Address (name="email" for Netlify reply-to) -->
+      <div class="form-group">
+        <label for="contact-email" class="form-label">
+          Email Address <span class="required" aria-hidden="true">*</span>
+        </label>
+        <input 
+          type="email" 
+          id="contact-email" 
+          name="email" 
+          class="form-input" 
+          placeholder="e.g. alex@example.com" 
+          required 
+          autocomplete="email"
+          aria-required="true"
+        />
+        <span class="field-error" id="email-error" role="alert" hidden>Please enter a valid email address.</span>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <!-- Business / Organization -->
+      <div class="form-group">
+        <label for="contact-business" class="form-label">
+          Business / Organization <span class="optional-label">(Optional)</span>
+        </label>
+        <input 
+          type="text" 
+          id="contact-business" 
+          name="business" 
+          class="form-input" 
+          placeholder="e.g. Island Craft Carpentry" 
+          autocomplete="organization"
+        />
+      </div>
+
+      <!-- Phone -->
+      <div class="form-group">
+        <label for="contact-phone" class="form-label">
+          Phone Number <span class="optional-label">(Optional)</span>
+        </label>
+        <input 
+          type="tel" 
+          id="contact-phone" 
+          name="phone" 
+          class="form-input" 
+          placeholder="e.g. (718) 555-0199" 
+          autocomplete="tel"
+        />
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <!-- Service Needed -->
+      <div class="form-group">
+        <label for="contact-service" class="form-label">
+          Service Needed
+        </label>
+        <select id="contact-service" name="service" class="form-select">
+          <option value="Not Sure Yet">Select a service category...</option>
+          <option value="Website Development">Website Development</option>
+          <option value="Custom Software">Custom Software & Dashboards</option>
+          <option value="Automation">Business Automation</option>
+          <option value="API / Integration">API & System Integration</option>
+          <option value="AI Tool / Integration">AI Tools & Integrations</option>
+          <option value="Bug Fix / Technical Support">Bug Fix / Technical Support</option>
+          <option value="Maintenance">Ongoing Maintenance</option>
+          <option value="Not Sure Yet">Not Sure Yet / Custom Consultation</option>
+        </select>
+      </div>
+
+      <!-- Budget Range -->
+      <div class="form-group">
+        <label for="contact-budget" class="form-label">
+          Estimated Budget Range
+        </label>
+        <select id="contact-budget" name="budget" class="form-select">
+          <option value="Not sure yet">Select budget range...</option>
+          <option value="Under $250">Under $250 (Small fixes / scripts)</option>
+          <option value="$250–$500">$250 – $500 (Single-page site / simple automation)</option>
+          <option value="$500–$1,000">$500 – $1,000 (Multi-page business site)</option>
+          <option value="$1,000–$2,500">$1,000 – $2,500 (Expanded site / custom tool)</option>
+          <option value="$2,500–$5,000">$2,500 – $5,000 (Custom web application)</option>
+          <option value="$5,000+">$5,000+ (Full system build)</option>
+          <option value="Not sure yet">Not sure yet (Need guidance)</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-grid">
+      <!-- Desired Timeline -->
+      <div class="form-group">
+        <label for="contact-timeline" class="form-label">
+          Desired Timeline <span class="optional-label">(Optional)</span>
+        </label>
+        <select id="contact-timeline" name="timeline" class="form-select">
+          <option value="Flexible">Select timeline...</option>
+          <option value="Urgent (1-2 weeks)">Urgent (1–2 weeks)</option>
+          <option value="Within 1 month">Within 1 month</option>
+          <option value="Within 2-3 months">Within 2–3 months</option>
+          <option value="Flexible">Flexible / Planning stage</option>
+        </select>
+      </div>
+
+      <!-- Website / Existing System URL -->
+      <div class="form-group">
+        <label for="contact-url" class="form-label">
+          Existing Website or System URL <span class="optional-label">(Optional)</span>
+        </label>
+        <input 
+          type="url" 
+          id="contact-url" 
+          name="existing_url" 
+          class="form-input" 
+          placeholder="https://example.com" 
+        />
+      </div>
+    </div>
+
+    <!-- Preferred Contact Method -->
+    <div class="form-group">
+      <label class="form-label">Preferred Contact Method</label>
+      <div class="radio-group">
+        <label class="radio-label">
+          <input type="radio" name="preferred_contact" value="Email" checked />
+          <span>Email</span>
+        </label>
+        <label class="radio-label">
+          <input type="radio" name="preferred_contact" value="Phone" />
+          <span>Phone</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Project Description -->
+    <div class="form-group">
+      <label for="contact-description" class="form-label">
+        Project Description & Requirements <span class="required" aria-hidden="true">*</span>
+      </label>
+      <textarea 
+        id="contact-description" 
+        name="description" 
+        class="form-textarea" 
+        placeholder="Tell me about your business, the challenge you are trying to solve, or what you need built..." 
+        required 
+        aria-required="true"
+      ></textarea>
+      <span class="field-error" id="description-error" role="alert" hidden>Please describe your project requirements.</span>
+    </div>
+
+    <!-- Security Warning Notice -->
+    <div class="security-notice">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span>
+        <strong>Privacy Notice:</strong> Please do not submit passwords, private API keys, financial information, or other sensitive credentials through this form.
+      </span>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-submit-container">
+      <button type="submit" id="submit-btn" class="btn btn-primary btn-lg" style="width: 100%;">
+        <span id="btn-text">Submit Project Inquiry</span>
+        <span id="btn-spinner" class="spinner" hidden aria-hidden="true"></span>
+      </button>
+      <p class="form-disclaimer">
+        No sales spam. Direct response from an independent software engineer.
+      </p>
+    </div>
+  </form>
+</div>
+
+<style>
+  .form-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .inquiry-form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .optional-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.25rem;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+
+  .radio-label input[type="radio"] {
+    accent-color: var(--accent-glow);
+    width: 16px;
+    height: 16px;
+  }
+
+  .field-error {
+    display: block;
+    color: var(--error);
+    font-size: 0.825rem;
+    margin-top: 0.35rem;
+    font-weight: 500;
+  }
+
+  .security-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 1.75rem;
+    font-size: 0.825rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .security-notice svg {
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--accent-glow);
+  }
+
+  .form-submit-container {
+    margin-top: 0.5rem;
+  }
+
+  .form-disclaimer {
+    text-align: center;
+    font-size: 0.825rem;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
+  }
+
+  /* Form Alerts */
+  .form-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+  }
+
+  .form-alert-success {
+    background: var(--success-surface);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    color: #a7f3d0;
+  }
+
+  .form-alert-success .alert-icon {
+    color: var(--success);
+  }
+
+  .form-alert-error {
+    background: var(--error-surface);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #fecaca;
+  }
+
+  .form-alert-error .alert-icon {
+    color: var(--error);
+  }
+
+  .alert-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    color: #ffffff;
+  }
+
+  .alert-text {
+    font-size: 0.925rem;
+    line-height: 1.5;
+  }
+
+  /* Spinner */
+  .spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .form-wrapper {
+      padding: 1.5rem;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Interactive Validation, URL param preselection, and Netlify submission handling
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('project-inquiry-form') as HTMLFormElement | null;
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement | null;
+    const btnText = document.getElementById('btn-text');
+    const btnSpinner = document.getElementById('btn-spinner');
+    const successBanner = document.getElementById('form-success-banner');
+    const errorBanner = document.getElementById('form-error-banner');
+
+    if (!form) return;
+
+    // Check URL parameters for pre-selected service (e.g., from Pricing page "Request This Project" button)
+    const urlParams = new URLSearchParams(window.location.search);
+    const serviceParam = urlParams.get('service');
+    if (serviceParam) {
+      const serviceSelect = document.getElementById('contact-service') as HTMLSelectElement | null;
+      if (serviceSelect) {
+        // Find matching option or select appropriate category
+        for (let i = 0; i < serviceSelect.options.length; i++) {
+          if (
+            serviceParam.toLowerCase().includes(serviceSelect.options[i].value.toLowerCase()) ||
+            serviceSelect.options[i].value.toLowerCase().includes(serviceParam.toLowerCase())
+          ) {
+            serviceSelect.selectedIndex = i;
+            break;
+          }
+        }
+      }
+    }
+
+    // Check if redirected with ?success=true
+    if (urlParams.get('success') === 'true') {
+      if (successBanner) {
+        successBanner.removeAttribute('hidden');
+        successBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      form.reset();
+    }
+
+    // Client-side Validation & Ajax Submission to Netlify
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      let hasError = false;
+
+      const nameInput = document.getElementById('contact-name') as HTMLInputElement;
+      const emailInput = document.getElementById('contact-email') as HTMLInputElement;
+      const descInput = document.getElementById('contact-description') as HTMLTextAreaElement;
+
+      const nameError = document.getElementById('name-error');
+      const emailError = document.getElementById('email-error');
+      const descError = document.getElementById('description-error');
+
+      // Validate Name
+      if (!nameInput.value.trim()) {
+        if (nameError) nameError.removeAttribute('hidden');
+        nameInput.focus();
+        hasError = true;
+      } else {
+        if (nameError) nameError.setAttribute('hidden', '');
+      }
+
+      // Validate Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailInput.value.trim() || !emailRegex.test(emailInput.value.trim())) {
+        if (emailError) emailError.removeAttribute('hidden');
+        if (!hasError) emailInput.focus();
+        hasError = true;
+      } else {
+        if (emailError) emailError.setAttribute('hidden', '');
+      }
+
+      // Validate Description
+      if (!descInput.value.trim()) {
+        if (descError) descError.removeAttribute('hidden');
+        if (!hasError) descInput.focus();
+        hasError = true;
+      } else {
+        if (descError) descError.setAttribute('hidden', '');
+      }
+
+      if (hasError) return;
+
+      // Loading state
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnText) btnText.textContent = 'Submitting inquiry...';
+      if (btnSpinner) btnSpinner.removeAttribute('hidden');
+      if (errorBanner) errorBanner.setAttribute('hidden', '');
+
+      try {
+        const formData = new FormData(form);
+        const urlEncoded = new URLSearchParams(formData as any).toString();
+
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: urlEncoded
+        });
+
+        if (response.ok) {
+          if (successBanner) {
+            successBanner.removeAttribute('hidden');
+            successBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          form.reset();
+        } else {
+          // If Netlify response fails, fall back to native submission
+          form.submit();
+        }
+      } catch (err) {
+        // In case of network interruption, submit natively
+        form.submit();
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (btnText) btnText.textContent = 'Submit Project Inquiry';
+        if (btnSpinner) btnSpinner.setAttribute('hidden', '');
+      }
+    });
+  });
+</script>

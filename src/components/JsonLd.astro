@@ -1,0 +1,99 @@
+---
+import { siteConfig, hasEmail, hasPhone } from '../config/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  url?: string;
+  type?: 'Organization' | 'WebSite' | 'Service';
+  serviceData?: {
+    name: string;
+    description: string;
+    category: string;
+  };
+}
+
+const {
+  title = siteConfig.businessName,
+  description = siteConfig.tagline,
+  url = siteConfig.canonicalUrl,
+  type = 'Organization',
+  serviceData
+} = Astro.props;
+
+// Build strict, factual Schema.org JSON-LD without fabricated reviews or physical addresses
+const organizationSchema: Record<string, any> = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: siteConfig.businessName,
+  url: siteConfig.canonicalUrl,
+  logo: `${siteConfig.canonicalUrl}/favicon.svg`,
+  description: siteConfig.tagline,
+  areaServed: [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Staten Island, New York'
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'New York City, New York'
+    },
+    {
+      '@type': 'Country',
+      name: 'United States'
+    }
+  ]
+};
+
+if (hasEmail) {
+  organizationSchema.email = siteConfig.contactEmail;
+}
+if (hasPhone) {
+  organizationSchema.telephone = siteConfig.phone;
+}
+
+const sameAs: string[] = [];
+if (siteConfig.githubUrl) sameAs.push(siteConfig.githubUrl);
+if (siteConfig.fiverrUrl) sameAs.push(siteConfig.fiverrUrl);
+if (siteConfig.linkedInUrl) sameAs.push(siteConfig.linkedInUrl);
+if (sameAs.length > 0) {
+  organizationSchema.sameAs = sameAs;
+}
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteConfig.businessName,
+  url: siteConfig.canonicalUrl,
+  description: siteConfig.heroSubhead
+};
+
+const serviceSchema = serviceData ? {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: serviceData.name,
+  serviceType: serviceData.category,
+  description: serviceData.description,
+  provider: {
+    '@type': 'Organization',
+    name: siteConfig.businessName,
+    url: siteConfig.canonicalUrl
+  },
+  areaServed: [
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Staten Island, New York'
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'New York City, New York'
+    }
+  ]
+} : null;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+{serviceSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+)}

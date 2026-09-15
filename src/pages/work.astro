@@ -1,0 +1,180 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { projects } from '../data/projects';
+import { siteConfig } from '../config/site';
+
+const title = `Technical Capabilities & Demo Projects | ${siteConfig.businessName}`;
+const description = 'Explore concrete proof of craftsmanship: high-speed web architectures, internal workflow dashboards, and business automation pipelines.';
+---
+
+<Layout title={title} description={description}>
+  <section class="section page-header-section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Proof of Craftsmanship</span>
+        <h1>Technical Capabilities & Demo Projects</h1>
+        <p>
+          I value honesty and engineering transparency above all else. Because Staten Island Software is an independent practice building its public client portfolio, I never fabricate client logos, testimonials, or fake case studies.
+        </p>
+      </div>
+
+      <!-- Credibility Policy Banner -->
+      <div class="credibility-banner card">
+        <div class="banner-badge">
+          <span class="badge badge-blue">Transparency Guarantee</span>
+        </div>
+        <div class="banner-body">
+          <h3>Understanding My Portfolio</h3>
+          <p>
+            The items showcased below represent <strong>functional demo applications</strong> and <strong>concept architectures</strong> engineered to illustrate exact code patterns, interface polish, and performance benchmarks. Every project clearly distinguishes between demo implementations and production client projects.
+          </p>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="grid-2 projects-grid">
+        {projects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Standards Section -->
+  <section class="section standards-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Engineering Rigor</span>
+        <h2>How I Architect Every Project</h2>
+        <p>Whether building a $349 single-page website or a $1,499 custom web tool, these foundations apply.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="standard-card card">
+          <div class="standard-icon">⚡</div>
+          <h3>Performance First</h3>
+          <p>
+            Zero unnecessary JavaScript libraries. Lean, semantic HTML and CSS that achieves 90+ Mobile Lighthouse scores and sub-second load times on mobile connections.
+          </p>
+        </div>
+
+        <div class="standard-card card">
+          <div class="standard-icon">🔒</div>
+          <h3>Security & Privacy</h3>
+          <p>
+            Strict HTTP security headers, honeypot spam protection, safe environment variable separation, and zero exposure of client credentials.
+          </p>
+        </div>
+
+        <div class="standard-card card">
+          <div class="standard-icon">📦</div>
+          <h3>Maintainable Code</h3>
+          <p>
+            Type-safe TypeScript, modular architecture, and structured documentation so any developer can maintain or expand the project in the future.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="work-cta-wrap card">
+        <h2>Have a Specific Application in Mind?</h2>
+        <p>
+          I can build a working proof-of-concept or implement your custom business tool. Reach out with your requirements for a direct evaluation.
+        </p>
+        <div class="cta-btns">
+          <a href="/contact" class="btn btn-primary btn-lg">
+            Discuss Your Project Scope
+          </a>
+          <a href="/pricing" class="btn btn-secondary btn-lg">
+            Review Pricing & Rates
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-header-section {
+    padding-top: 4.5rem;
+  }
+
+  .credibility-banner {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-left: 4px solid var(--accent-glow);
+    padding: 2rem 2.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .banner-badge {
+    margin-bottom: 0.75rem;
+  }
+
+  .banner-body h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .banner-body p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .projects-grid {
+    margin-bottom: 2rem;
+  }
+
+  .standards-section {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .standard-card {
+    padding: 2.25rem;
+  }
+
+  .standard-icon {
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .standard-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .standard-card p {
+    font-size: 0.925rem;
+    line-height: 1.6;
+  }
+
+  .work-cta-wrap {
+    margin-top: 4rem;
+    padding: 3.5rem 2rem;
+    text-align: center;
+    background: var(--bg-card);
+    border: 1px solid var(--accent-border);
+  }
+
+  .work-cta-wrap h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .work-cta-wrap p {
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+  }
+
+  .cta-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

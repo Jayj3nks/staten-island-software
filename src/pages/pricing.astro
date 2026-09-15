@@ -1,0 +1,509 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PricingCard from '../components/PricingCard.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import { websiteTiers, softwarePricing, monthlySupportTiers, paymentPolicies } from '../data/pricing';
+import { faqs } from '../data/faqs';
+import { siteConfig } from '../config/site';
+
+const title = `Introductory Pricing & Rates | ${siteConfig.businessName}`;
+const description = 'Transparent introductory pricing for websites, custom internal tools, automations, bug fixes, and monthly maintenance without agency overhead.';
+---
+
+<Layout title={title} description={description}>
+  <!-- Pricing Header -->
+  <section class="section pricing-header-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Introductory Pricing</span>
+        <h1>Professional Software Development Without Agency Overhead</h1>
+        <p class="pricing-intro-subhead">
+          Straightforward starting prices while Staten Island Software builds its client portfolio. Every project is scoped with a clear written deliverable list before work begins.
+        </p>
+      </div>
+
+      <!-- Website Packages -->
+      <div class="category-heading">
+        <span class="category-badge">Category 01</span>
+        <h2>Website Packages</h2>
+        <p>Built for fast loading, clean mobile responsiveness, and high conversion. No bloated page builders.</p>
+      </div>
+
+      <div class="grid-3 website-grid">
+        {websiteTiers.map((tier) => (
+          <PricingCard tier={tier} />
+        ))}
+      </div>
+
+      <div class="pricing-scope-alert card">
+        <div class="alert-icon" aria-hidden="true">💡</div>
+        <div class="alert-text">
+          <strong>Website Scope Note:</strong> Packages cover standard business websites, lead capture, and service showcases. Complex database applications, payment processing, or custom portals are quoted as custom software below.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Software & Automation Pricing -->
+  <section class="section software-pricing-section" id="software">
+    <div class="container">
+      <div class="category-heading">
+        <span class="category-badge">Category 02</span>
+        <h2>Software, Automation & Technical Services</h2>
+        <p>Targeted solutions for internal tools, script automation, API integrations, and troubleshooting.</p>
+      </div>
+
+      <div class="software-table-wrap card">
+        <table class="software-table" aria-label="Software and Automation Starting Rates">
+          <thead>
+            <tr>
+              <th scope="col">Service / Deliverable</th>
+              <th scope="col">Starting Price</th>
+              <th scope="col" class="hide-mobile">Scope Overview</th>
+              <th scope="col" style="text-align: right;">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {softwarePricing.map((item) => (
+              <tr>
+                <td class="service-name-col">
+                  <strong>{item.name}</strong>
+                  <div class="mobile-desc">{item.description}</div>
+                </td>
+                <td class="price-col">
+                  <span class="price-pill">{item.price}</span>
+                </td>
+                <td class="desc-col hide-mobile">
+                  <p>{item.description}</p>
+                  <span class="deliverable-sub">{item.deliverables}</span>
+                </td>
+                <td class="action-col">
+                  <a 
+                    href={`/contact?service=${encodeURIComponent(item.serviceParam)}`} 
+                    class="btn btn-secondary btn-sm"
+                  >
+                    Request This
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div class="hourly-clarification card">
+        <h3>Hourly Consulting vs. Fixed-Price Quotes</h3>
+        <p>
+          While on-demand consulting is available at <strong>$45/hour</strong>, I strongly prefer providing a <strong>fixed project quote</strong> whenever your project scope can be clearly defined. Fixed quotes give you predictable costs with zero risk of run-away billable hours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Monthly Support & Maintenance -->
+  <section class="section support-section" id="support">
+    <div class="container">
+      <div class="category-heading">
+        <span class="category-badge">Category 03</span>
+        <h2>Monthly Support & Maintenance</h2>
+        <p>Continuous reliability, security patches, and on-call engineering without hiring a full-time developer.</p>
+      </div>
+
+      <div class="grid-2 support-grid">
+        {monthlySupportTiers.map((support) => (
+          <div class="support-plan-card card">
+            <div class="plan-header">
+              <h3 class="plan-title">{support.name}</h3>
+              <div class="plan-price-wrap">
+                <span class="starting-text">Starting at</span>
+                <div class="amount-line">
+                  <span class="amount">{support.price}</span>
+                  <span class="freq">{support.frequency}</span>
+                </div>
+              </div>
+              <p class="plan-desc">{support.description}</p>
+            </div>
+
+            <ul class="plan-features">
+              {support.features.map((feature) => (
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>{feature}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="plan-action">
+              <a 
+                href={`/contact?service=${encodeURIComponent(support.serviceParam)}`} 
+                class="btn btn-secondary btn-lg" 
+                style="width: 100%; text-align: center;"
+              >
+                Inquire About {support.name}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="support-scope-clarity card">
+        <h4>Fair-Use Scope Clarity</h4>
+        <p>
+          Maintenance plans are engineered for routine health, minor enhancements, security updates, and troubleshooting. They do not represent "unlimited new feature development." New major modules, substantial redesigns, or third-party platform migrations are scoped separately.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Policy & Terms -->
+  <section class="section policies-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Payment Structure</span>
+        <h2>Project Payment Terms</h2>
+        <p>Straightforward expectations. No hidden clauses or complicated contracts.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="policy-card card">
+          <div class="policy-num">01</div>
+          <h3>Typical Payment Terms</h3>
+          <p class="policy-highlight">{paymentPolicies.typicalStructure}</p>
+          <p class="policy-sub">
+            A 50% deposit secures development time, with the final 50% due only after you test, approve, and verify the completed work.
+          </p>
+        </div>
+
+        <div class="policy-card card">
+          <div class="policy-num">02</div>
+          <h3>Milestones on Larger Projects</h3>
+          <p class="policy-highlight">Phased Deliverables</p>
+          <p class="policy-sub">
+            {paymentPolicies.milestones} You only pay for each milestone as tangible code deliverables are tested and approved.
+          </p>
+        </div>
+
+        <div class="policy-card card">
+          <div class="policy-num">03</div>
+          <h3>Custom Quoting Beyond Scope</h3>
+          <p class="policy-highlight">Clear Scope Addendums</p>
+          <p class="policy-sub">
+            {paymentPolicies.disclaimer} If you need features added during development, they are scoped and quoted in writing before work begins.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing FAQs -->
+  <section class="section" id="faqs">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Pricing Questions</span>
+        <h2>Frequently Asked Questions About Pricing</h2>
+      </div>
+
+      <FaqAccordion items={faqs.filter(f => f.category === 'Pricing' || f.category === 'General')} />
+
+      <div class="center-cta-wrap" style="text-align: center; margin-top: 3.5rem;">
+        <a href="/contact" class="btn btn-primary btn-lg">
+          Request a Detailed Project Quote
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .pricing-header-section {
+    padding-top: 4.5rem;
+  }
+
+  .pricing-intro-subhead {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    line-height: 1.6;
+  }
+
+  .category-heading {
+    margin: 3.5rem 0 2rem 0;
+  }
+
+  .category-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-glow);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .category-heading h2 {
+    font-size: 1.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .category-heading p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+  }
+
+  .website-grid {
+    margin-bottom: 2rem;
+  }
+
+  .pricing-scope-alert {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: var(--bg-surface);
+    padding: 1.25rem 1.75rem;
+    border-radius: var(--radius-md);
+  }
+
+  .alert-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .alert-text {
+    font-size: 0.925rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  /* Software Table */
+  .software-pricing-section {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .software-table-wrap {
+    background: var(--bg-card);
+    padding: 0;
+    overflow-x: auto;
+    margin-bottom: 2rem;
+  }
+
+  .software-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+
+  .software-table th {
+    background: var(--bg-surface-elevated);
+    padding: 1.2rem 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .software-table td {
+    padding: 1.35rem 1.5rem;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+  }
+
+  .software-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .service-name-col strong {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+  }
+
+  .mobile-desc {
+    display: none;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.35rem;
+  }
+
+  .price-pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent-glow);
+    background: var(--accent-surface);
+    border: 1px solid var(--accent-border);
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+
+  .desc-col p {
+    font-size: 0.925rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .deliverable-sub {
+    font-size: 0.825rem;
+    color: var(--text-muted);
+  }
+
+  .action-col {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .hourly-clarification {
+    background: var(--bg-card);
+    padding: 2rem 2.5rem;
+  }
+
+  .hourly-clarification h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hourly-clarification p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* Support Grid */
+  .support-grid {
+    margin-bottom: 2rem;
+  }
+
+  .support-plan-card {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+  }
+
+  .plan-title {
+    font-size: 1.45rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .plan-price-wrap {
+    margin-bottom: 1rem;
+  }
+
+  .starting-text {
+    font-size: 0.8rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .amount-line {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+  }
+
+  .amount {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+  }
+
+  .freq {
+    color: var(--text-muted);
+    font-weight: 600;
+  }
+
+  .plan-desc {
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .plan-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+  }
+
+  .plan-features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .plan-features svg {
+    color: var(--accent-glow);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .support-scope-clarity {
+    background: var(--bg-surface);
+    padding: 1.75rem 2rem;
+  }
+
+  .support-scope-clarity h4 {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .support-scope-clarity p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  /* Policy Cards */
+  .policy-card {
+    padding: 2rem;
+  }
+
+  .policy-num {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-glow);
+    margin-bottom: 0.75rem;
+  }
+
+  .policy-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .policy-highlight {
+    font-weight: 700;
+    color: #e2e8f0;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .policy-sub {
+    font-size: 0.885rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 768px) {
+    .hide-mobile {
+      display: none;
+    }
+
+    .mobile-desc {
+      display: block;
+    }
+
+    .software-table td,
+    .software-table th {
+      padding: 1rem;
+    }
+  }
+</style>

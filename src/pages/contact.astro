@@ -1,0 +1,257 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { siteConfig, hasEmail, hasPhone, hasFiverr } from '../config/site';
+
+const title = `Request a Quote & Project Inquiry | ${siteConfig.businessName}`;
+const description = 'Tell me about your project or business problem. Receive a transparent scope of work and upfront pricing quote directly from an independent software engineer.';
+---
+
+<Layout title={title} description={description}>
+  <section class="section contact-page-section">
+    <div class="container">
+      <div class="contact-layout-grid">
+        <!-- Form Left Column -->
+        <div class="form-column">
+          <div class="contact-header">
+            <span class="section-tag">Direct Inquiry</span>
+            <h1>Request a Project Quote</h1>
+            <p>
+              Tell me about your project, desired timeline, and what business problem you need solved. Every inquiry is reviewed personally by an independent engineer.
+            </p>
+          </div>
+
+          <!-- Working Netlify Form -->
+          <ContactForm />
+        </div>
+
+        <!-- Sidebar Right Column -->
+        <div class="info-column">
+          <!-- Expectation Card -->
+          <div class="sidebar-card card">
+            <h3>What Happens Next?</h3>
+            <ul class="process-expectations">
+              <li>
+                <div class="step-badge">1</div>
+                <div>
+                  <strong>Personal Review</strong>
+                  <p>I review your submission within one business day to evaluate requirements and technical feasibility.</p>
+                </div>
+              </li>
+              <li>
+                <div class="step-badge">2</div>
+                <div>
+                  <strong>Clarification or Call</strong>
+                  <p>If needed, I send quick follow-up questions or we schedule a brief phone consultation.</p>
+                </div>
+              </li>
+              <li>
+                <div class="step-badge">3</div>
+                <div>
+                  <strong>Fixed Proposal</strong>
+                  <p>You receive a clear scope document with itemized deliverables, timeline, and exact fixed pricing.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Guarantees Card -->
+          <div class="sidebar-card card">
+            <h3>Direct Engineering Commitments</h3>
+            <ul class="commitments-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>No aggressive sales calls or newsletter spam.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Upfront transparent pricing before commitment.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Honest assessment: I won't recommend code you don't need.</span>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Complete code ownership upon final delivery.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Fiverr Positioning (Section 14: Rendered ONLY if real Fiverr URL is configured) -->
+          {hasFiverr && (
+            <div class="sidebar-card card fiverr-card">
+              <h3>Prefer Fiverr?</h3>
+              <p>Selected services are also available through my verified Fiverr profile with platform escrow protections.</p>
+              <a href={siteConfig.fiverrUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" style="width: 100%; text-align: center;">
+                View Fiverr Profile
+              </a>
+            </div>
+          )}
+
+          <!-- Direct Channels (Rendered ONLY if real values are set) -->
+          {(hasEmail || hasPhone) && (
+            <div class="sidebar-card card">
+              <h3>Direct Contact</h3>
+              <ul class="direct-list">
+                {hasEmail && (
+                  <li>
+                    <span>Email:</span>
+                    <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>
+                  </li>
+                )}
+                {hasPhone && (
+                  <li>
+                    <span>Phone:</span>
+                    <a href={`tel:${siteConfig.phone}`}>{siteConfig.phone}</a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .contact-page-section {
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .contact-layout-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 3.5rem;
+  }
+
+  .contact-header {
+    margin-bottom: 2rem;
+  }
+
+  .contact-header h1 {
+    font-size: clamp(2.2rem, 3.5vw, 3rem);
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  .contact-header p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .sidebar-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: 2rem;
+  }
+
+  .sidebar-card h3 {
+    font-size: 1.15rem;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+  }
+
+  .process-expectations {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .process-expectations li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .step-badge {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent-surface);
+    border: 1px solid var(--accent-border);
+    color: var(--accent-glow);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .process-expectations strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    margin-bottom: 0.2rem;
+  }
+
+  .process-expectations p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .commitments-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .commitments-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.885rem;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+
+  .commitments-list svg {
+    color: var(--accent-glow);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .fiverr-card p {
+    font-size: 0.885rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .direct-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .direct-list li {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .direct-list span {
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 950px) {
+    .contact-layout-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import HowIWork from '../components/HowIWork.astro';
+import TrustSection from '../components/TrustSection.astro';
+import { siteConfig } from '../config/site';
+
+const title = `About Staten Island Software | Independent Software Engineering`;
+const description = 'Learn about Staten Island Software: an independent software engineering practice providing practical websites, custom tools, and automations for NYC and remote clients.';
+---
+
+<Layout title={title} description={description}>
+  <section class="section about-hero">
+    <div class="container">
+      <div class="about-hero-grid">
+        <div class="about-hero-content">
+          <span class="section-tag">Independent Engineering Practice</span>
+          <h1>Practical Software Engineering for Real Business Problems</h1>
+          <p class="about-lead">
+            Staten Island Software provides direct, independent software engineering for businesses, entrepreneurs, and organizations. Projects range from responsive websites and automations to custom internal tools and system integrations.
+          </p>
+          <div class="about-meta-pills">
+            <span class="meta-pill">
+              <span class="dot-green" aria-hidden="true"></span>
+              Based in Staten Island, NY
+            </span>
+            <span class="meta-pill">
+              Serving Staten Island, NYC & Remote
+            </span>
+            <span class="meta-pill">
+              No Agency Overhead
+            </span>
+          </div>
+        </div>
+
+        <div class="about-statement-card card">
+          <h3>The Approach</h3>
+          <p class="statement-quote">
+            "Most small businesses don't need complex enterprise software suites with seven layers of abstraction. They need things that work reliably, load instantly, and eliminate hours of manual headaches."
+          </p>
+          <div class="statement-author">
+            <strong>{siteConfig.ownerName}</strong>
+            <span>Founder & Software Engineer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Narrative Section -->
+  <section class="section narrative-section">
+    <div class="container">
+      <div class="narrative-grid">
+        <div class="narrative-col">
+          <span class="section-tag">Why Independent?</span>
+          <h2>Direct Access to the Engineer Building Your Project</h2>
+          <p>
+            When you work with a traditional digital agency, a significant portion of your budget goes to account managers, junior handoffs, and operational overhead. Communication gets diluted, timelines drag out, and the person writing the code rarely understands the nuance of your business problem.
+          </p>
+          <p>
+            At Staten Island Software, you collaborate directly with an engineer. From initial requirements gathering and scope definition to development, testing, and deployment, you have a single point of technical accountability.
+          </p>
+        </div>
+
+        <div class="narrative-col">
+          <span class="section-tag">Grounded Philosophy</span>
+          <h2>Built for Reliability, Not Buzzwords</h2>
+          <p>
+            I do not build software to showcase unnecessary framework trends or chase marketing buzzwords. I build software to solve the specific bottlenecks impacting your day-to-day operations:
+          </p>
+          <ul class="principles-list">
+            <li>
+              <strong>Pragmatic Tool Selection:</strong> Using clean web standards, TypeScript, and modern static architectures to keep systems lightweight and inexpensive to run.
+            </li>
+            <li>
+              <strong>Upfront Transparency:</strong> Pricing, timelines, and deliverable boundaries are documented in plain English before any code is written.
+            </li>
+            <li>
+              <strong>Clean Code Handoff:</strong> You own your assets. Every project is packaged with clear documentation, clean code, and zero vendor lock-in.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How I Work -->
+  <HowIWork />
+
+  <!-- Expectations & Trust -->
+  <TrustSection />
+
+  <!-- Local Commitment -->
+  <section class="section local-section">
+    <div class="container text-center">
+      <div class="local-card card">
+        <span class="section-tag">Local Focus, Remote Capabilities</span>
+        <h2>Serving Staten Island, New York City & Beyond</h2>
+        <p>
+          Whether you are a local contractor on Richmond Avenue, a professional practice in Manhattan, or an entrepreneur operating remotely across the country, you receive the same disciplined engineering rigor and personal attention.
+        </p>
+        <div class="local-actions">
+          <a href="/contact" class="btn btn-primary btn-lg">
+            Discuss Your Project
+          </a>
+          <a href="/pricing" class="btn btn-secondary btn-lg">
+            View Transparent Rates
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .about-hero {
+    padding-top: 4.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .about-hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .about-lead {
+    font-size: 1.2rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 1.25rem 0 2rem 0;
+  }
+
+  .about-meta-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .meta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    padding: 0.4rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+  }
+
+  .dot-green {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+  }
+
+  .about-statement-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    padding: 2.5rem;
+    position: relative;
+  }
+
+  .statement-quote {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    font-style: italic;
+    color: #e2e8f0;
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  .statement-author {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .statement-author strong {
+    color: var(--text-primary);
+  }
+
+  .statement-author span {
+    font-size: 0.825rem;
+    color: var(--text-muted);
+  }
+
+  /* Narrative */
+  .narrative-section {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .narrative-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+  }
+
+  .narrative-col h2 {
+    font-size: 1.85rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .narrative-col p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .principles-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .principles-list li {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+  }
+
+  .principles-list strong {
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  /* Local Section */
+  .local-card {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem;
+    text-align: center;
+    background: var(--bg-surface);
+  }
+
+  .local-card h2 {
+    font-size: 2.1rem;
+    margin: 0.75rem 0 1.25rem 0;
+  }
+
+  .local-card p {
+    font-size: 1.1rem;
+    max-width: 620px;
+    margin: 0 auto 2.25rem auto;
+  }
+
+  .local-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 900px) {
+    .about-hero-grid,
+    .narrative-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

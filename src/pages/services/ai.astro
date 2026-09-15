@@ -1,0 +1,315 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { services } from '../../data/services';
+import { siteConfig } from '../../config/site';
+
+const service = services.find((s) => s.slug === 'ai')!;
+const pageTitle = `Practical AI Tools & Integrations | ${siteConfig.businessName}`;
+const pageDesc = 'Practical AI-assisted engineering: document extraction, customer inquiry triage, and internal knowledge search without the hype.';
+
+const serviceSchema = {
+  name: 'AI Tools & Integrations',
+  description: service.summary,
+  category: 'SoftwareEngineering'
+};
+---
+
+<Layout title={pageTitle} description={pageDesc} serviceData={serviceSchema}>
+  <section class="section service-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/services">Services</a>
+        <span class="sep">/</span>
+        <span>AI Tools & Integrations</span>
+      </div>
+
+      <div class="service-hero-grid">
+        <div class="hero-left">
+          <span class="section-tag">Targeted Machine Learning & LLMs</span>
+          <h1>{service.headline}</h1>
+          <p class="lead-text">
+            Artificial intelligence is an engineering tool, not magic. When applied to the right problem, language models and document extraction APIs eliminate hours of tedious unstructured data entry.
+          </p>
+          <div class="hero-cta-group">
+            <a href="/contact?service=AI%20Tool%20/%20Integration" class="btn btn-primary btn-lg">
+              Explore an AI Implementation
+            </a>
+            <a href="/pricing#software" class="btn btn-secondary btn-lg">
+              View Starting Rates
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="rate-callout-card card">
+            <span class="badge badge-blue">Responsible Scope</span>
+            <h3>Practical AI Pricing</h3>
+            <div class="rate-item">
+              <span class="rate-name">Document Parsing / Extraction Pipeline</span>
+              <span class="rate-price">Starting at $349</span>
+            </div>
+            <div class="rate-item">
+              <span class="rate-name">Inquiry Classification / Triage Script</span>
+              <span class="rate-price">Starting at $299</span>
+            </div>
+            <div class="rate-item">
+              <span class="rate-name">Internal Knowledge Search Utility</span>
+              <span class="rate-price">Starting at $699</span>
+            </div>
+            <p class="rate-note">
+              Zero customer data used for model training. Strict privacy boundaries.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Grounded Engineering Principles -->
+  <section class="section">
+    <div class="container">
+      <div class="engineering-truth-box card">
+        <h3>My Policy on Artificial Intelligence</h3>
+        <p>
+          I do not recommend AI for every project. If a standard database query or 10 lines of deterministic code solves your problem faster, cheaper, and with 100% predictability, that is exactly what I will recommend. AI is only implemented when it genuinely solves a bottleneck that traditional software cannot handle efficiently.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Capabilities</span>
+        <h2>Practical AI Use Cases for Businesses</h2>
+      </div>
+
+      <div class="grid-2">
+        {service.offerings.map((offering) => (
+          <div class="offering-card card">
+            <div class="offering-icon">⚙️</div>
+            <span class="offering-title">{offering}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Practical Scenarios -->
+  <section class="section practical-section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Tested Applications</span>
+        <h2>Real-World Business Workflows</h2>
+      </div>
+
+      <div class="grid-3">
+        {service.practicalUseCases.map((useCase) => (
+          <div class="usecase-card card">
+            <h3>{useCase.title}</h3>
+            <p>{useCase.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy & Guardrails -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header text-left">
+        <span class="section-tag">Data Security</span>
+        <h2>Privacy Boundaries & Guardrails</h2>
+      </div>
+
+      <div class="grid-2">
+        {service.whatToExpect.map((item) => (
+          <div class="handoff-card card">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="check-icon"><polyline points="20 6 9 17 4 12"/></svg>
+            <p>{item}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="bottom-cta-box card">
+        <h3>Wondering if an AI workflow makes sense for your business?</h3>
+        <p>Let's evaluate your process honestly. If AI isn't the right fit, I'll tell you upfront.</p>
+        <a href="/contact?service=AI%20Tool%20/%20Integration" class="btn btn-primary btn-lg">
+          Discuss Your Project
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .service-hero {
+    padding-top: 3.5rem;
+    padding-bottom: 4rem;
+    background: radial-gradient(ellipse 60% 40% at 30% 0%, rgba(37, 99, 235, 0.12), transparent 70%);
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: var(--accent-glow);
+  }
+
+  .service-hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .lead-text {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin: 1.25rem 0 2rem 0;
+  }
+
+  .hero-cta-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .rate-callout-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    padding: 2.25rem;
+  }
+
+  .rate-callout-card h3 {
+    font-size: 1.25rem;
+    margin: 0.75rem 0 1.25rem 0;
+  }
+
+  .rate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.925rem;
+  }
+
+  .rate-name {
+    color: var(--text-secondary);
+  }
+
+  .rate-price {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--accent-glow);
+  }
+
+  .rate-note {
+    font-size: 0.825rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+  }
+
+  .engineering-truth-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    padding: 2rem 2.5rem;
+    border-left: 4px solid var(--accent-glow);
+    margin-bottom: 3.5rem;
+  }
+
+  .engineering-truth-box h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+  }
+
+  .engineering-truth-box p {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+  }
+
+  .offering-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-surface);
+  }
+
+  .offering-icon {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  .offering-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .practical-section {
+    background: var(--bg-surface);
+  }
+
+  .usecase-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .usecase-card p {
+    font-size: 0.925rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+  }
+
+  .handoff-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: var(--bg-surface);
+  }
+
+  .check-icon {
+    color: var(--success);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .bottom-cta-box {
+    margin-top: 3.5rem;
+    padding: 3rem 2rem;
+    text-align: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--accent-border);
+  }
+
+  .bottom-cta-box h3 {
+    font-size: 1.65rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .bottom-cta-box p {
+    font-size: 1.05rem;
+    max-width: 550px;
+    margin: 0 auto 1.75rem auto;
+  }
+
+  @media (max-width: 900px) {
+    .service-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+</style>

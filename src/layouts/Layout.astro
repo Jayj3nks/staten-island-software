@@ -1,0 +1,86 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import JsonLd from '../components/JsonLd.astro';
+import { siteConfig } from '../config/site';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  serviceData?: {
+    name: string;
+    description: string;
+    category: string;
+  };
+}
+
+const {
+  title = `${siteConfig.businessName} | Custom Software, Websites & Automation`,
+  description = 'Custom software engineering, websites, automation, integrations and technical solutions for Staten Island, NYC and remote clients.',
+  canonical,
+  serviceData
+} = Astro.props;
+
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteConfig.canonicalUrl).toString();
+const ogImageUrl = `${siteConfig.canonicalUrl}/og-image.svg`;
+const gscToken = siteConfig.googleSearchConsoleVerification || import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:site_name" content={siteConfig.businessName} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google Search Console Verification (if configured) -->
+    {gscToken && <meta name="google-site-verification" content={gscToken} />}
+
+    <!-- Structured Data -->
+    <JsonLd title={title} description={description} url={canonicalUrl} serviceData={serviceData} />
+  </head>
+  <body>
+    <!-- Skip to Content Accessible Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Global Header -->
+    <Header />
+
+    <!-- Main Content Region -->
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+
+    <!-- Global Footer -->
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  #main-content {
+    flex: 1 0 auto;
+    outline: none;
+  }
+</style>

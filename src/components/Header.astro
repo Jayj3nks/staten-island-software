@@ -1,0 +1,294 @@
+---
+import { siteConfig } from '../config/site';
+
+const navLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/services', label: 'Services' },
+  { href: '/pricing', label: 'Pricing' },
+  { href: '/work', label: 'Work' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="site-header" id="main-header">
+  <div class="container header-inner">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-logo" aria-label="Staten Island Software Homepage">
+      <div class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Abstract Verrazzano Bridge Towers -->
+          <path d="M9 31 L13 9 L15 9 L16 31" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M31 31 L27 9 L25 9 L24 31" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Catenary Suspension Cable -->
+          <path d="M5 17 Q20 25 35 17" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Bridge Deck -->
+          <path d="M4 31 L36 31" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Software syntax bracket < / > -->
+          <path d="M17 23 L15 24.5 L17 26" stroke="#f8fafc" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M23 23 L25 24.5 L23 26" stroke="#f8fafc" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M21 21.5 L19 27.5" stroke="#38bdf8" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">STATEN ISLAND</span>
+        <span class="brand-sub">SOFTWARE</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-list">
+        {navLinks.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <li>
+              <a href={link.href} class={`nav-link ${isActive ? 'active' : ''}`} aria-current={isActive ? 'page' : undefined}>
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <a href="/contact" class="btn btn-primary btn-sm header-cta">
+        Request a Quote
+      </a>
+
+      <!-- Mobile Navigation Toggle -->
+      <button 
+        id="mobile-menu-btn" 
+        class="mobile-menu-toggle" 
+        aria-label="Toggle mobile menu" 
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Navigation Drawer -->
+  <div id="mobile-nav" class="mobile-nav" aria-label="Mobile Navigation" hidden>
+    <div class="container mobile-nav-inner">
+      <ul class="mobile-nav-list">
+        {navLinks.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <li>
+              <a href={link.href} class={`mobile-nav-link ${isActive ? 'active' : ''}`}>
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+      <div class="mobile-nav-cta">
+        <a href="/contact" class="btn btn-primary btn-lg" style="width: 100%;">
+          Request a Quote
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(7, 11, 20, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-subtle);
+    transition: background-color var(--transition-fast);
+  }
+
+  .header-inner {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-medium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .logo-mark svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .brand-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+  }
+
+  .brand-sub {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--accent-glow);
+  }
+
+  .desktop-nav {
+    display: block;
+  }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    list-style: none;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.85rem;
+    font-size: 0.925rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+  }
+
+  .nav-link:hover {
+    color: #ffffff;
+    background: var(--bg-surface-elevated);
+  }
+
+  .nav-link.active {
+    color: var(--accent-glow);
+    font-weight: 600;
+    background: var(--accent-surface);
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 36px;
+    height: 36px;
+    padding: 6px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .hamburger-bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: all var(--transition-fast);
+  }
+
+  .mobile-nav {
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-surface);
+    padding: 1.5rem 0 2rem;
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 0.85rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-radius: var(--radius-sm);
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link.active {
+    background: var(--accent-surface);
+    color: var(--accent-glow);
+  }
+
+  @media (max-width: 860px) {
+    .desktop-nav,
+    .header-cta {
+      display: none;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+    }
+  }
+</style>
+
+<script>
+  // Mobile Menu Interactive Toggle
+  const toggleBtn = document.getElementById('mobile-menu-btn');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  if (toggleBtn && mobileNav) {
+    toggleBtn.addEventListener('click', () => {
+      const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!isExpanded));
+      if (isExpanded) {
+        mobileNav.setAttribute('hidden', '');
+      } else {
+        mobileNav.removeAttribute('hidden');
+      }
+    });
+
+    // Close when clicking navigation link
+    mobileNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('hidden', '');
+      });
+    });
+  }
+</script>

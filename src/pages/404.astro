@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+
+const title = `Page Not Found (404) | ${siteConfig.businessName}`;
+const description = 'The requested page could not be located. Browse Staten Island Software services, pricing, or request a quote.';
+---
+
+<Layout title={title} description={description}>
+  <section class="section error-section">
+    <div class="container text-center">
+      <div class="error-box card">
+        <div class="error-badge">
+          <span class="badge badge-blue">HTTP 404</span>
+        </div>
+        <h1 class="error-code">404</h1>
+        <h2>Endpoint Not Located</h2>
+        <p class="error-message">
+          The page or route you requested does not exist or may have been moved.
+        </p>
+
+        <div class="quick-links-box">
+          <h3>Helpful Destinations:</h3>
+          <ul class="error-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/services">Software Services</a></li>
+            <li><a href="/pricing">Introductory Pricing</a></li>
+            <li><a href="/work">Demo Projects</a></li>
+            <li><a href="/contact">Request a Quote</a></li>
+          </ul>
+        </div>
+
+        <div class="error-actions">
+          <a href="/" class="btn btn-primary btn-lg">
+            Return to Homepage
+          </a>
+          <a href="/contact" class="btn btn-secondary btn-lg">
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .error-section {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+  }
+
+  .error-box {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem;
+    text-align: center;
+    background: var(--bg-surface);
+  }
+
+  .error-badge {
+    margin-bottom: 1.5rem;
+  }
+
+  .error-code {
+    font-family: var(--font-mono);
+    font-size: clamp(4rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    color: var(--accent-glow);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.05em;
+  }
+
+  .error-box h2 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .error-message {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .quick-links-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .quick-links-box h3 {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .error-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .error-links a {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-glow);
+  }
+
+  .error-links a:hover {
+    color: #ffffff;
+  }
+
+  .error-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

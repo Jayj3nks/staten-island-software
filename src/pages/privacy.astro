@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../config/site';
+
+const title = `Privacy Policy | ${siteConfig.businessName}`;
+const description = 'Plain-language privacy policy explaining how project inquiries and contact information are handled at Staten Island Software.';
+---
+
+<Layout title={title} description={description}>
+  <section class="section legal-page-section">
+    <div class="container legal-container">
+      <div class="legal-header">
+        <span class="section-tag">Privacy Information</span>
+        <h1>Privacy Policy</h1>
+        <p class="last-updated">Last Updated: September 2026</p>
+      </div>
+
+      <div class="legal-content card">
+        <h2>1. Overview</h2>
+        <p>
+          Staten Island Software is an independent freelance software engineering practice operated by {siteConfig.ownerName}. This website is designed to provide information about my engineering services and to allow prospective clients to submit project inquiries.
+        </p>
+
+        <h2>2. Information Collected Through the Inquiry Form</h2>
+        <p>
+          When you submit an inquiry through the project quote form on this site, I collect the information you voluntarily provide:
+        </p>
+        <ul>
+          <li><strong>Contact Details:</strong> Your name, email address, phone number (if provided), and business/organization name.</li>
+          <li><strong>Project Specifications:</strong> The service needed, estimated budget, desired timeline, website/system URL, and your project description.</li>
+        </ul>
+        <p>
+          <strong>Notice Regarding Sensitive Credentials:</strong> You should never submit passwords, private API tokens, financial credentials, credit card details, or proprietary source code through the public web contact form.
+        </p>
+
+        <h2>3. How Your Information Is Used</h2>
+        <p>
+          The information you provide is used strictly for legitimate business communications:
+        </p>
+        <ul>
+          <li>Evaluating your project requirements and technical feasibility.</li>
+          <li>Preparing a detailed written scope of work and pricing estimate.</li>
+          <li>Communicating directly with you regarding your inquiry.</li>
+        </ul>
+        <p>
+          Your information is never sold, rented, leased, or traded to third-party marketing lists, data brokers, or advertising networks.
+        </p>
+
+        <h2>4. Form Processing & Hosting Infrastructure</h2>
+        <p>
+          This website is statically hosted on <strong>Netlify</strong>. When you submit the project inquiry form, the payload is transmitted securely via HTTPS and processed through Netlify Forms for delivery to my inbox. Netlify operates under standard industry security practices.
+        </p>
+
+        <h2>5. Cookies & Tracking Technologies</h2>
+        <p>
+          This website intentionally avoids invasive third-party tracking scripts, behavioral profiling tools, or marketing cookies. There is no Google Analytics or Facebook Pixel installed on this site.
+        </p>
+
+        <h2>6. Data Retention</h2>
+        <p>
+          Project inquiry submissions are retained only as long as necessary to evaluate your project, respond to communications, and maintain business records of client engagements. If an inquiry does not result in an active engagement, information is periodically pruned.
+        </p>
+
+        <h2>7. Contact & Privacy Inquiries</h2>
+        <p>
+          If you have questions about this privacy notice, or if you would like me to remove any contact information previously submitted, you may submit a request through the <a href="/contact">contact form</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .legal-page-section {
+    padding-top: 4.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .legal-container {
+    max-width: 860px;
+  }
+
+  .legal-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .legal-header h1 {
+    font-size: clamp(2.2rem, 3.5vw, 3rem);
+    margin: 0.5rem 0;
+  }
+
+  .last-updated {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .legal-content {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    padding: 3rem;
+  }
+
+  .legal-content h2 {
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-content h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .legal-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .legal-content ul {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .legal-content li {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .legal-content strong {
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .legal-content {
+      padding: 1.75rem;
+    }
+  }
+</style>

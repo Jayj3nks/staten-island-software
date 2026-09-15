@@ -1,0 +1,501 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import PricingCard from '../components/PricingCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import HowIWork from '../components/HowIWork.astro';
+import TrustSection from '../components/TrustSection.astro';
+import { services } from '../data/services';
+import { websiteTiers } from '../data/pricing';
+import { projects } from '../data/projects';
+import { faqs } from '../data/faqs';
+import { siteConfig } from '../config/site';
+
+const homeTitle = `${siteConfig.businessName} | Custom Software, Websites & Automation`;
+const homeDesc = 'Custom software engineering, websites, automation, integrations and technical solutions for Staten Island, NYC and remote clients.';
+---
+
+<Layout title={homeTitle} description={homeDesc}>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-indicator" aria-hidden="true"></span>
+          <span>{siteConfig.serviceArea}</span>
+        </div>
+
+        <h1 class="hero-title">
+          Software Engineering for Businesses That <span class="gradient-text">Need Things to Work</span>
+        </h1>
+
+        <p class="hero-subhead">
+          {siteConfig.heroSubhead}
+        </p>
+
+        <div class="hero-actions">
+          <a href="/contact" class="btn btn-primary btn-lg">
+            Request a Quote
+          </a>
+          <a href="/pricing" class="btn btn-secondary btn-lg">
+            View Pricing
+          </a>
+        </div>
+
+        <div class="hero-tertiary">
+          <a href="/services" class="text-link">
+            <span>Explore Services</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </a>
+          <span class="bullet" aria-hidden="true">•</span>
+          <span class="positioning-note">Independent Engineering • Practical Starting Prices</span>
+        </div>
+      </div>
+
+      <!-- Hero Visual / Technical Terminal Mockup -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="terminal-window">
+          <div class="terminal-bar">
+            <div class="terminal-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <span class="terminal-title">staten-island-software.ts</span>
+            <span class="terminal-tag">PROD</span>
+          </div>
+          <div class="terminal-body">
+            <div class="code-line"><span class="c-keyword">import</span> &#123; <span class="c-variable">Engineer</span> &#125; <span class="c-keyword">from</span> <span class="c-string">'@sis/core'</span>;</div>
+            <div class="code-line">&nbsp;</div>
+            <div class="code-line"><span class="c-comment">// Practical software engineering without agency overhead</span></div>
+            <div class="code-line"><span class="c-keyword">export const</span> <span class="c-variable">business</span> = <span class="c-keyword">new</span> <span class="c-type">Engineer</span>(&#123;</div>
+            <div class="code-line indent-1"><span class="c-prop">location</span>: <span class="c-string">'Staten Island, NYC'</span>,</div>
+            <div class="code-line indent-1"><span class="c-prop">remoteClients</span>: <span class="c-boolean">true</span>,</div>
+            <div class="code-line indent-1"><span class="c-prop">services</span>: [</div>
+            <div class="code-line indent-2"><span class="c-string">'Websites'</span>, <span class="c-string">'Custom Software'</span>,</div>
+            <div class="code-line indent-2"><span class="c-string">'Automations'</span>, <span class="c-string">'API Integrations'</span></div>
+            <div class="code-line indent-1">],</div>
+            <div class="code-line indent-1"><span class="c-prop">approach</span>: <span class="c-string">'Solve real problems. Keep it fast.'</span></div>
+            <div class="code-line">&#125;);</div>
+            <div class="code-line">&nbsp;</div>
+            <div class="code-line status-line">
+              <span class="status-symbol">✓</span> <span class="c-success">System status: Ready for new project scoping</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Categories Section -->
+  <section class="section services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Core Capabilities</span>
+        <h2>What I Build for Clients</h2>
+        <p>
+          Targeted technical solutions designed to replace clunky processes, automate manual routines, and give your business a reliable digital presence.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        {services.map((service) => (
+          <ServiceCard service={service} />
+        ))}
+      </div>
+
+      <div class="center-cta-wrap">
+        <a href="/services" class="btn btn-secondary btn-lg">
+          View All Services & Use Cases
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section (How I Work) -->
+  <HowIWork />
+
+  <!-- Pricing Overview Section -->
+  <section class="section pricing-preview-section" id="pricing-preview">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Introductory Pricing</span>
+        <h2>Professional Engineering at Practical Prices</h2>
+        <p>
+          Straightforward starting prices while Staten Island Software builds its client portfolio. Every project is scoped before work begins.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        {websiteTiers.map((tier) => (
+          <PricingCard tier={tier} />
+        ))}
+      </div>
+
+      <div class="pricing-disclaimer-box">
+        <div class="disclaimer-text">
+          <strong>Need custom software or an automation?</strong> Bug fixes start at <strong>$75</strong>, automations start at <strong>$149</strong>, and custom internal tools start at <strong>$699</strong>.
+        </div>
+        <a href="/pricing" class="btn btn-primary btn-md">
+          See Full Pricing & Software Rates
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities / Demo Projects Section -->
+  <section class="section work-preview-section" id="capabilities">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Technical Capabilities</span>
+        <h2>Proof of Craftsmanship</h2>
+        <p>
+          To maintain strict credibility, I never fabricate client reviews. Below are technical demonstrations and concept architectures illustrating real-world capabilities.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        {projects.slice(0, 2).map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+
+      <div class="center-cta-wrap">
+        <a href="/work" class="btn btn-secondary btn-lg">
+          View All Technical Demos & Case Studies
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Section (Expectations) -->
+  <TrustSection />
+
+  <!-- FAQ Section -->
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Common Questions</span>
+        <h2>Frequently Asked Questions</h2>
+        <p>
+          Transparent answers about project scoping, pricing, deposits, and technical deliverables.
+        </p>
+      </div>
+
+      <FaqAccordion items={faqs.slice(0, 5)} />
+
+      <div class="center-cta-wrap">
+        <a href="/pricing#faqs" class="text-link">
+          <span>Read all FAQs and policies</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final Call to Action -->
+  <section class="section final-cta-section">
+    <div class="container">
+      <div class="cta-banner">
+        <div class="cta-content">
+          <span class="section-tag">Ready to start?</span>
+          <h2 class="cta-title">Tell Me About Your Project</h2>
+          <p class="cta-desc">
+            Whether you need a new website, a custom operational dashboard, or an automation to eliminate spreadsheet headaches, I am ready to review your requirements and provide a clear scope.
+          </p>
+          <div class="cta-buttons">
+            <a href="/contact" class="btn btn-primary btn-lg">
+              Request a Project Quote
+            </a>
+            <a href="/pricing" class="btn btn-outline btn-lg">
+              Review Pricing First
+            </a>
+          </div>
+          <p class="cta-footnote">
+            Direct response from an independent software engineer • No sales pressure
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero Styles */
+  .hero-section {
+    padding: 5.5rem 0 4.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    align-self: flex-start;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    background: var(--bg-surface-elevated);
+    border: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+
+  .pulse-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--success);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+  }
+
+  .hero-title {
+    font-size: clamp(2.4rem, 4.5vw, 3.65rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .gradient-text {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subhead {
+    font-size: 1.15rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    margin-bottom: 2.25rem;
+    max-width: 580px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+  }
+
+  .hero-tertiary {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 600;
+    color: var(--accent-glow);
+  }
+
+  .text-link:hover {
+    color: #ffffff;
+  }
+
+  .bullet {
+    color: var(--border-medium);
+  }
+
+  .positioning-note {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  /* Terminal Mockup Visual */
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .terminal-window {
+    width: 100%;
+    max-width: 480px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    overflow: hidden;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    background: var(--bg-surface-elevated);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .terminal-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot-red { background: #ef4444; }
+  .dot-yellow { background: #f59e0b; }
+  .dot-green { background: #10b981; }
+
+  .terminal-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .terminal-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--accent-glow);
+    background: var(--accent-surface);
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+  }
+
+  .terminal-body {
+    padding: 1.25rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.825rem;
+    line-height: 1.65;
+    background: #080d19;
+  }
+
+  .code-line {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  .indent-1 { padding-left: 1.25rem; }
+  .indent-2 { padding-left: 2.25rem; }
+
+  .c-keyword { color: #f472b6; }
+  .c-variable { color: #60a5fa; }
+  .c-type { color: #38bdf8; }
+  .c-string { color: #a7f3d0; }
+  .c-comment { color: #64748b; font-style: italic; }
+  .c-prop { color: #e2e8f0; }
+  .c-boolean { color: #fbbf24; }
+  .c-success { color: #34d399; }
+
+  .status-line {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-symbol {
+    color: #34d399;
+    font-weight: bold;
+  }
+
+  /* Section Styles */
+  .center-cta-wrap {
+    text-align: center;
+    margin-top: 3rem;
+  }
+
+  .pricing-disclaimer-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .disclaimer-text {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  .disclaimer-text strong {
+    color: var(--text-primary);
+  }
+
+  /* Final CTA Banner */
+  .cta-banner {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(56, 189, 248, 0.05) 100%), var(--bg-card);
+    border: 1px solid var(--accent-border);
+    border-radius: var(--radius-xl);
+    padding: 4rem 2rem;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .cta-content {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    margin-bottom: 1.25rem;
+  }
+
+  .cta-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-footnote {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 900px) {
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .hero-visual {
+      order: 2;
+    }
+  }
+</style>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#0a0f1d"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" stroke="#1e293b" stroke-width="1.5"/>
+  <!-- Bridge Tower West (Staten Island) -->
+  <path d="M14 46 L20 18 L23 18 L25 46" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bridge Tower East (Brooklyn) -->
+  <path d="M50 46 L44 18 L41 18 L39 46" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Main Suspension Cable (Catenary curve) -->
+  <path d="M8 28 Q32 38 56 28" stroke="#2563eb" stroke-width="2.2" stroke-linecap="round"/>
+  <!-- Horizontal Tower Struts -->
+  <path d="M18 28 L23 28" stroke="#38bdf8" stroke-width="1.5"/>
+  <path d="M41 28 L46 28" stroke="#38bdf8" stroke-width="1.5"/>
+  <!-- Bridge Roadway Deck -->
+  <path d="M6 46 L58 46" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+  <!-- Software Bracket Accent < / > -->
+  <path d="M28 35 L26 37 L28 39" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36 35 L38 37 L36 39" stroke="#f8fafc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M33 33 L31 41" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round"/>
+</svg>
