@@ -5,7 +5,6 @@ interface Props {
   title?: string;
   description?: string;
   url?: string;
-  type?: 'Organization' | 'WebSite' | 'Service';
   serviceData?: {
     name: string;
     description: string;
@@ -15,9 +14,8 @@ interface Props {
 
 const {
   title = siteConfig.businessName,
-  description = siteConfig.tagline,
+  description = siteConfig.heroSubhead,
   url = siteConfig.canonicalUrl,
-  type = 'Organization',
   serviceData
 } = Astro.props;
 
@@ -63,9 +61,9 @@ if (sameAs.length > 0) {
 const websiteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: siteConfig.businessName,
-  url: siteConfig.canonicalUrl,
-  description: siteConfig.heroSubhead
+  name: title || siteConfig.businessName,
+  url: url || siteConfig.canonicalUrl,
+  description: description || siteConfig.heroSubhead
 };
 
 const serviceSchema = serviceData ? {
@@ -92,8 +90,8 @@ const serviceSchema = serviceData ? {
 } : null;
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
-<script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+<script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 {serviceSchema && (
-  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
 )}
